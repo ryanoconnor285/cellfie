@@ -1,45 +1,58 @@
 import React, { useState } from 'react'
-import { Menu, Segment, Button } from 'semantic-ui-react'
+import { Menu, Segment } from 'semantic-ui-react'
 
 const Navbar = () => {
-    const [activeItem, setActiveItem] = useState('editorials')
+    const [activeItem, setActiveItem] = useState('landing')
     
     return (
         <Segment inverted>
           <Menu inverted pointing secondary>
-            <Menu.Item header>Cellfie</Menu.Item>
             <Menu.Item
-            name='editorials'
-            active={activeItem === 'editorials'}
-            onClick={(e) => setActiveItem('editorials')}
+            name='landing'
+            active={activeItem === 'landing'}
+            onClick={(e) => setActiveItem('landing')}
             >
-            Editorials
+            Cellfie
+            </Menu.Item>
+            <Menu.Item
+            name='downloadTestDataset'
+            active={activeItem === 'downloadTestDataset'}
+            onClick={(e) => setActiveItem('downloadTestDataset')}
+            >
+            Download Test Dataset
             </Menu.Item>
 
             <Menu.Item 
-            name='reviews' 
-            active={activeItem === 'reviews'} 
-            onClick={e => setActiveItem('reviews')}
+            name='exampleResults' 
+            active={activeItem === 'exampleResults'} 
+            onClick={e => setActiveItem('exampleResults')}
             >
-            Reviews
+            Example Results
             </Menu.Item>
 
             <Menu.Item
-            name='upcomingEvents'
-            active={activeItem === 'upcomingEvents'}
-            onClick={e => setActiveItem('upcomingEvents')}
+            name='documentation'
+            active={activeItem === 'documentation'}
+            onClick={e => setActiveItem('documentation')}
             >
-            Upcoming Events
+            Documentation
             </Menu.Item>
-            <Menu.Menu position='right'>
-                <Menu.Item>
-                    <Button primary>Sign up</Button>
-                </Menu.Item>
 
-                <Menu.Item>
-                    <Button>Log-in</Button>
-                </Menu.Item>
-            </Menu.Menu>
+            <Menu.Item
+            name='contact'
+            active={activeItem === 'contact'}
+            onClick={e => setActiveItem('contact')}
+            >
+            Contact Us
+            </Menu.Item>
+
+            <Menu.Item
+            name='reportBug'
+            active={activeItem === 'reportBug'}
+            onClick={e => setActiveItem('reportBug')}
+            >
+            Report a Bug
+            </Menu.Item>
           </Menu>
         </Segment>
     )
