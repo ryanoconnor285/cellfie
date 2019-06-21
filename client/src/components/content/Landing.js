@@ -5,9 +5,9 @@ import RunForm from "../forms/RunForm";
 
 const Landing = () => {
   return (
-    <Grid centered columns={3} divided>
+    <Grid centered columns={1} divided>
       <Grid.Row>
-        <Grid.Column>
+        <Grid.Column width={10}>
           <RunForm />
         </Grid.Column>
       </Grid.Row>
