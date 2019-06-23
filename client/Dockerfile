@@ -1,15 +1,20 @@
-# base image
-FROM node:12.2.0-alpine
+# Base image
+FROM node:10.12.0-alpine
 
-# set working directory
-WORKDIR /app
+# Create and set working directory
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
 
-# add `/app/node_modules/.bin` to $PATH
-ENV PATH /app/node_modules/.bin:$PATH
+# Add `/usr/src/app/node_modules/.bin` to $PATH
+ENV PATH /usr/src/app/node_modules/.bin:$PATH
 
-# install and cache app dependencies
-COPY package.json /app/package.json
-RUN yarn
+# Environment variables
+
+# Install and cache app dependencies
+COPY package*.json ./
+RUN npm install
+
+expose 3000
 
 # start app
-CMD ["yarn", "start"]
+CMD ["npm", "start"]
