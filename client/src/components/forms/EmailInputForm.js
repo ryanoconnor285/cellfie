@@ -2,48 +2,47 @@ import React, { useState, useContext } from "react";
 
 import { UserContext } from "../../context/UserContext";
 import { RunContext } from "../../context/RunContext";
-import { Button, Form, Message } from "semantic-ui-react";
+import { Form, Message } from "semantic-ui-react";
 
 function EmailInputForm() {
   const [, setUser] = useContext(UserContext);
-  const [, setRun] = useContext(RunContext);
-  const [formData, setFormData] = useState({
+  const [run, setRun] = useContext(RunContext);
+  const [formData,] = useState({
     email: "",
     runName: ""
   });
 
   //TODO handle setErrors if user enters an invalid email
-  const [errors,] = useState({});
+  const [errors] = useState({});
 
   const handleChange = e => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = e => {
-    e.preventDefault();
+    setRun({ ...run, [e.target.name]: e.target.value });
     setUser({ email: formData.email });
-    setRun({ name: formData.runName });
   };
 
   return (
-    <Form error>
+    <Form width={6} error>
       <Form.Input
         name="email"
+        value={run.email ? run.email : ""}
         label="Email"
+        width={6}
         placeholder="joe@email.com"
         onChange={handleChange}
       />
       {errors.email ? (
         <Message
           error
-          header="Email Required"
+          header="Invalid Email"
           content="Your email will be used to find your data later."
         />
       ) : null}
 
       <Form.Input
         name="runName"
+        value={run.runName ? run.runName : ""}
         label="Run Name"
+        width={6}
         placeholder="rat samples"
         onChange={handleChange}
       />
@@ -54,7 +53,6 @@ function EmailInputForm() {
           content="You will need this to keep runs organized."
         />
       ) : null}
-      <Button onClick={handleSubmit}>Submit</Button>
     </Form>
   );
 }
