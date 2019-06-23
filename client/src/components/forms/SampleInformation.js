@@ -1,28 +1,16 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 
-import { UserContext } from "../../context/UserContext";
 import { RunContext } from "../../context/RunContext";
-import { Button, Form } from "semantic-ui-react";
+import { Form, Table, Radio, Input } from "semantic-ui-react";
 
 function FileUploadForm() {
-  const [, setUser] = useContext(UserContext);
-  const [, setRun] = useContext(RunContext);
-  const [formData, setFormData] = useState({
-    email: "",
-    runName: ""
-  });
+  const [run, setRun] = useContext(RunContext);
 
   //TODO handle setErrors if user enters an invalid email
   // const [errors, setErrors] = useState({});
 
   const handleChange = e => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = e => {
-    e.preventDefault();
-    setUser({ email: formData.email });
-    setRun({ name: formData.runName });
+    setRun({ ...run, [e.target.name]: e.target.value });
   };
 
   return (
@@ -31,20 +19,29 @@ function FileUploadForm() {
       <h5>Please enter a name for the condition each represents ( e.g. ToxinA, TimePoint1, TimePoint2, etc.)</h5>
       <h5>Replicates of the smae condition need to have the same name.</h5>
       <h5>Please check which files are control replicates.</h5>
-      <Form.Field>
-        {" "}
-        <Button
-          content="Choose File"
-          labelPosition="left"
-          icon="file"
-          onClick={handleSubmit}
-        />
-        <input
-          type="file"
-          hidden
-          onChange={handleChange}
-        />
-      </Form.Field>
+      <Table celled>
+        <Table.Header>
+          <Table.Row>
+            <Table.HeaderCell width={6}>File Name</Table.HeaderCell>
+            <Table.HeaderCell width={1}>Control</Table.HeaderCell>
+            <Table.HeaderCell width={5}>Condition Name</Table.HeaderCell>
+          </Table.Row>
+        </Table.Header>
+
+        <Table.Body>
+          <Table.Row>
+            <Table.Cell>File 1</Table.Cell>
+            <Table.Cell><Radio toggle/></Table.Cell>
+            <Table.Cell><Input fluid name="conditionName" value={run.conditionName ? run.conditionName : ""} placeholder='ToxinA...' 
+        onChange={handleChange} /></Table.Cell>
+          </Table.Row>
+          <Table.Row>
+            <Table.Cell>File 2</Table.Cell>
+            <Table.Cell><Radio toggle/></Table.Cell>
+            <Table.Cell><Input fluid name="conditionName" value={run.conditionName ? run.conditionName : ""} placeholder='ToxinA...' onChange={handleChange} /></Table.Cell>
+          </Table.Row>
+        </Table.Body>
+      </Table>
     </Form>
   );
 }
