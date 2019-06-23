@@ -1,28 +1,16 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 
-import { UserContext } from "../../context/UserContext";
 import { RunContext } from "../../context/RunContext";
 import { Button, Form } from "semantic-ui-react";
 
 function FileUploadForm() {
-  const [, setUser] = useContext(UserContext);
-  const [, setRun] = useContext(RunContext);
-  const [formData, setFormData] = useState({
-    email: "",
-    runName: ""
-  });
+  const [run, setRun] = useContext(RunContext);
 
   //TODO handle setErrors if user enters an invalid email
   // const [errors, setErrors] = useState({});
 
   const handleChange = e => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = e => {
-    e.preventDefault();
-    setUser({ email: formData.email });
-    setRun({ name: formData.runName });
+    setRun({ ...run, [e.target.name]: e.target.value });
   };
 
   return (
@@ -34,7 +22,6 @@ function FileUploadForm() {
           content="Choose File"
           labelPosition="left"
           icon="file"
-          onClick={handleSubmit}
         />
         <input
           type="file"
