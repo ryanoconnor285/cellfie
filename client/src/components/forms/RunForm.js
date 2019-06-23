@@ -2,6 +2,7 @@ import React, { Fragment, useState } from "react";
 import EmailInputForm from "./EmailInputForm";
 import FileUploadForm from "./FileUploadForm";
 import SampleInformation from "./SampleInformation";
+import ParametersForm from "./ParametersForm";
 import { Menu, Segment } from "semantic-ui-react";
 
 function RunForm() {
@@ -42,6 +43,7 @@ function RunForm() {
         {activeItem === '0' && <EmailInputForm />}
         {activeItem === '1' && <FileUploadForm />}
         {activeItem === '2' && <SampleInformation />}
+        {activeItem === '3' && <ParametersForm />}
       </Segment>
     </Fragment>
   );
