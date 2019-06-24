@@ -3,7 +3,6 @@ import { RunContext } from "../../context/RunContext";
 import { Form, Dropdown } from 'semantic-ui-react'
 
 function FormExampleWidthField() {
-  const [option, setOption] = useState('')
   const [run, setRun] = useContext(RunContext);
 
   const screenTypeOptions = [
