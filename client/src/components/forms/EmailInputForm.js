@@ -36,9 +36,8 @@ function EmailInputForm() {
     console.log(run)
   };
 
-  const handleDropdownChange = (e, { name }) => {
-    setRun({ ...run, name: e.target.textContent });
-    setUser({ email: formData.email });
+  const handleDropdownChange = (e, { name, value}) => {
+    setRun({ ...run, [name]: value });
     console.log(run)
   };
 
