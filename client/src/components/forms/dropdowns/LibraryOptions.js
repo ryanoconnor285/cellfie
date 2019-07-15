@@ -1,13 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 
 export default function LibraryOptions(props) {
   const {run, setRun} = props
-  const [value, setValue] = useState('select')
-
-  useEffect(() => {
-    setValue(run.libraryOptions ? run.libraryOptions.value : 'Select')
-  });
+  const [value,] = useState('select')
 
   const libraryOptions = [
     {

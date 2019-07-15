@@ -1,7 +1,6 @@
 import React, { Fragment, useState } from "react";
 import EmailInputForm from "./EmailInputForm";
 import FileUploadForm from "./FileUploadForm";
-import SampleInformation from "./SampleInformation";
 import ParametersForm from "./ParametersForm";
 import { Menu, Segment } from "semantic-ui-react";
 
@@ -26,15 +25,9 @@ function RunForm() {
           onClick={handleItemClick}
         />
         <Menu.Item
-          name="Sample Information"
+          name="Library and Parameters"
           value="2"
           active={activeItem === "2"}
-          onClick={handleItemClick}
-        />
-        <Menu.Item
-          name="Library and Parameters"
-          value="3"
-          active={activeItem === "3"}
           onClick={handleItemClick}
         />
       </Menu>
@@ -42,8 +35,7 @@ function RunForm() {
       <Segment attached="bottom">
         {activeItem === '0' && <EmailInputForm />}
         {activeItem === '1' && <FileUploadForm />}
-        {activeItem === '2' && <SampleInformation />}
-        {activeItem === '3' && <ParametersForm />}
+        {activeItem === '2' && <ParametersForm />}
       </Segment>
     </Fragment>
   );
