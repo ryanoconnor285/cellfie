@@ -1,10 +1,12 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 
+import Papa from 'papaparse';
 import { RunContext } from "../../context/RunContext";
-import { Button, Form, Table, Radio, Input } from "semantic-ui-react";
+import { Form, Table, Radio, Input } from "semantic-ui-react";
 
 function FileUploadForm() {
   const [run, setRun] = useContext(RunContext);
+  const [file, setFile] = useState(null);
 
   //TODO handle setErrors if user enters an invalid email
   // const [errors, setErrors] = useState({});
@@ -13,47 +15,42 @@ function FileUploadForm() {
     setRun({ ...run, [e.target.name]: e.target.value });
   };
 
+  const handleFileSelect = e => {
+    Papa.parse(e.target.files[0], {
+      complete: function(results) {
+        setFile(results);
+        console.log(file);
+      }
+    });
+  }
+
   return (
     <Form error>
-      {" "}
       <Form.Field>
-        {" "}
-        <Button
-          content="Choose File"
-          labelPosition="left"
-          icon="file"
-        />
-        <input
+        <Form.Input
           type="file"
-          hidden
-          onChange={handleChange}
+          width={4}
+          onChange={handleFileSelect}
         />
       </Form.Field>
       <h1>Define your samples</h1>
-      <h5>Please enter a name for the condition each represents ( e.g. ToxinA, TimePoint1, TimePoint2, etc.)</h5>
-      <h5>Replicates of the smae condition need to have the same name.</h5>
-      <h5>Please check which files are control replicates.</h5>
       <Table celled>
         <Table.Header>
           <Table.Row>
-            <Table.HeaderCell width={6}>File Name</Table.HeaderCell>
+            <Table.HeaderCell width={6}>Sample</Table.HeaderCell>
             <Table.HeaderCell width={1}>Control</Table.HeaderCell>
             <Table.HeaderCell width={5}>Condition Name</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
-
         <Table.Body>
-          <Table.Row>
-            <Table.Cell>File 1</Table.Cell>
+          {file ? file.data[0].map((sample, index) => 
+          <Table.Row key={index}>
+            <Table.Cell>{sample}</Table.Cell>
             <Table.Cell><Radio toggle/></Table.Cell>
             <Table.Cell><Input fluid name="conditionName" value={run.conditionName ? run.conditionName : ""} placeholder='ToxinA...' 
         onChange={handleChange} /></Table.Cell>
           </Table.Row>
-          <Table.Row>
-            <Table.Cell>File 2</Table.Cell>
-            <Table.Cell><Radio toggle/></Table.Cell>
-            <Table.Cell><Input fluid name="conditionName" value={run.conditionName ? run.conditionName : ""} placeholder='ToxinA...' onChange={handleChange} /></Table.Cell>
-          </Table.Row>
+          ) : null}
         </Table.Body>
       </Table>
     </Form>
