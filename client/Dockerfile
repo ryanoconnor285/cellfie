@@ -14,7 +14,7 @@ ENV PATH /usr/src/app/node_modules/.bin:$PATH
 COPY package*.json ./
 RUN npm install
 
-expose 3000
+expose 3001
 
 # start app
 CMD ["npm", "start"]
