@@ -25,7 +25,7 @@ function RunForm() {
           onClick={handleItemClick}
         />
         <Menu.Item
-          name="Library and Parameters"
+          name="Parameters"
           value={2}
           active={activeItem === 2}
           onClick={handleItemClick}
