@@ -1,5 +1,5 @@
 # Base image
-FROM node:10.12.0-alpine
+FROM node:10.15.3-alpine
 
 # Create and set working directory
 RUN mkdir -p /usr/src/app
@@ -14,7 +14,7 @@ ENV PATH /usr/src/app/node_modules/.bin:$PATH
 COPY package*.json ./
 RUN npm install
 
-expose 3001
+expose 3000
 
 # start app
 CMD ["npm", "start"]
