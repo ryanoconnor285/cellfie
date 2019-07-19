@@ -8,8 +8,8 @@ function EmailInputForm() {
   const [, setUser] = useContext(UserContext);
   const [run, setRun] = useContext(RunContext);
   const [formData] = useState({
-    email: "",
-    runName: ""
+    contact: "",
+    name: ""
   });
 
   const referenceModelOptions = [
@@ -44,8 +44,8 @@ function EmailInputForm() {
   return (
     <Form width={6} error>
       <Form.Input
-        name="email"
-        value={run.email ? run.email : ""}
+        name="contact"
+        value={run.contact ? run.contact : ""}
         label="Email"
         width={6}
         placeholder="joe@email.com"
@@ -60,14 +60,14 @@ function EmailInputForm() {
       ) : null}
 
       <Form.Input
-        name="runName"
-        value={run.runName ? run.runName : ""}
+        name="name"
+        value={run.name ? run.name : ""}
         label="Run Name"
         width={6}
         placeholder="Run Name"
         onChange={handleChange}
       />
-      {errors.runName ? (
+      {errors.name ? (
         <Message
           error
           header="Run Name"
@@ -80,7 +80,7 @@ function EmailInputForm() {
         selection
         placeholder="Reference Model"
         options={referenceModelOptions}
-        width={4}
+        width={6}
         onChange={handleDropdownChange}
       />
     </Form>
