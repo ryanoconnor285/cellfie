@@ -19,7 +19,7 @@ function FileUploadForm() {
     Papa.parse(e.target.files[0], {
       complete: function(results) {
         setFile(results);
-        console.log(file);
+        console.log(results);
       }
     });
   }
@@ -29,7 +29,7 @@ function FileUploadForm() {
       <Form.Field>
         <Form.Input
           type="file"
-          width={4}
+          width={6}
           onChange={handleFileSelect}
         />
       </Form.Field>
