@@ -27,7 +27,8 @@ const defaultRun = {
       "name": "string"
     }
   ],
-  "status": "untried"
+  "status": "untried",
+  "file": null
 }
 
 export const RunProvider = ({ children }) => {
