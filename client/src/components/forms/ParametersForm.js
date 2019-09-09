@@ -1,7 +1,8 @@
 import React, { useContext } from "react";
-import FileUploadForm from "./FileUploadForm";
+import FileUploadForm from "./FileUpload";
 import GlobalThreshold from "./threshold/GlobalThreshold";
 import LocalThreshold from "./threshold/LocalThreshold";
+import EmailInput from "./EmailInputForm";
 import { RunContext } from "../../context/RunContext";
 import { Form } from "semantic-ui-react";
 
@@ -31,9 +32,10 @@ function FormExampleWidthField() {
   return (
     <Form>
       <h1>Configure your analysis</h1>
+      <h5>Email address (you will need this to retrieve results)</h5>
+      <EmailInput />
       <h5>
-        Please choose your the options for the definition of gene activity
-        threshold:
+        Please choose the options for the definition of gene activity threshold:
       </h5>
       <h3>Reference Model</h3>
       <Form.Dropdown
