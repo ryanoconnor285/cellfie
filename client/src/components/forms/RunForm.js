@@ -1,20 +1,40 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useContext } from "react";
 import EmailInputForm from "./EmailInputForm";
 import ParametersForm from "./ParametersForm";
-import axios from 'axios';
+import { FileContext } from "../../context/FileContext";
+import { UserContext } from "../../context/UserContext";
 import { Menu, Button, Segment } from "semantic-ui-react";
+import axios from 'axios';
 
 function RunForm() {
+  const [file] = useContext(FileContext)
+  const [user] = useContext(UserContext);
+  const [uploadedFile, setUploadedFile] = useState({})
   const [activeItem, setActiveItem] = useState(0);
 
   const handleItemClick = (e, { value }) => setActiveItem(value);
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault()
-    axios
-      .post('/api/upload')
-      .then(res => console.log(res.data))
-      .catch(err => console.log(err));
+    const formData = new FormData();
+    formData.append('file', file)
+    formData.append('uid', user.email)
+    try {
+      const res = await axios.post('/upload', formData, {
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
+      })
+      const { fileName, filePath } = res.data;
+      setUploadedFile({ fileName, filePath})
+      console.log(uploadedFile)
+    } catch(err) {
+      if(err.response.status === 500) {
+        console.log('There was a problem with the server')
+      } else {
+        console.log(err.response.data.msg);
+      }
+    }
   }
 
   return (
