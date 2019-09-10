@@ -49,6 +49,7 @@ function FormExampleWidthField() {
       />
       <h3>File Upload</h3>
       <FileUploadForm />
+      <h4>Total Samples: {run.totalSamples}</h4>
       <h3>Project Parameters</h3>
       <Form.Group>
         <Form.Dropdown
@@ -62,12 +63,6 @@ function FormExampleWidthField() {
             { key: "local", text: "Local", value: "local" }
           ]}
           onChange={handleChange}
-        />
-        <Form.Input
-          label="Total Samples"
-          name="totalSamples"
-          value={run.totalSamples}
-          placeholder="Total Samples"
         />
       </Form.Group>
       {run.geneThreshold === "global" ? <GlobalThreshold /> : null}
