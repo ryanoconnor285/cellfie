@@ -13,14 +13,14 @@ function RunForm() {
   const [activeItem, setActiveItem] = useState(0);
 
   const handleItemClick = (e, { value }) => setActiveItem(value);
-
+  const apiRoot = (process.env.NODE_ENV === 'production') ? '/server/upload' : '/upload'
   const handleSubmit = async e => {
     e.preventDefault()
     const formData = new FormData();
     formData.append('file', file)
     formData.append('uid', run.email)
     try {
-      const res = await axios.post('/upload', formData, {
+      const res = await axios.post(apiRoot, formData, {
         headers: {
           "Content-Type": "multipart/form-data"
         }
@@ -39,6 +39,7 @@ function RunForm() {
 
   return (
     <Fragment>
+      {apiRoot}
       <Menu attached="top" tabular>
         <Menu.Item
           name="Basic Info"
