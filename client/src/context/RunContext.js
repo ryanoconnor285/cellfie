@@ -4,6 +4,7 @@ export const RunContext = createContext({});
 
 const defaultRun = {
   "id": 0,
+  "email": "",
   "referenceModel": "human_Recon2_2",
   "totalSamples": 0,
   "geneThreshold": "global",
