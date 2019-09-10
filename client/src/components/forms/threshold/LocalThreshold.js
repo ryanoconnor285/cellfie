@@ -1,25 +1,15 @@
-import React, { Fragment, useState, useContext } from "react";
+import React, { Fragment, useContext } from "react";
 import { RunContext } from "../../../context/RunContext";
-import { Form, Button } from "semantic-ui-react";
+import { Form } from "semantic-ui-react";
 
 function LocalThreshold() {
   const [run, setRun] = useContext(RunContext);
-  const [options, setOptions] = useState({
-    id: 0,
-    moreThanTwoSamples: false,
-    thresholdMethod: "mean",
-    minimum: 25,
-    maximum: 75,
-    customLibraryUrl: "string"
-  });
 
   const handleSetOptions = (e, { name, value }) => {
-    setOptions({ ...options, [name]: value });
-  };
-
-
-  const handleLocalOptions = () => {
-    setRun({ ...run, localOptions: options });
+    setRun({ ...run, localOptions: {
+      ...run.localOptions,
+      [name]: value 
+    }});
     console.log(run);
   };
 
@@ -39,7 +29,7 @@ function LocalThreshold() {
           onChange={handleSetOptions}
         />
       </Form.Group>
-      {options.thresholdMethod === "minMaxMean" ? (
+      {run.localOptions.thresholdMethod === "minMaxMean" ? (
         <Form.Group>
           <Form.Dropdown
             label="Threshold Type"
@@ -68,7 +58,6 @@ function LocalThreshold() {
           </>
         </Form.Group>
       ) : null}
-      <Button onClick={handleLocalOptions}>Set Options</Button>
     </Fragment>
   );
 }
