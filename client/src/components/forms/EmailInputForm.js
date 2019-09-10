@@ -1,23 +1,23 @@
 import React, { useState, useContext } from "react";
-import { UserContext } from "../../context/UserContext";
+import { RunContext } from "../../context/RunContext";
 import { Form, Message } from "semantic-ui-react";
 
 function EmailInputForm() {
-  const [user, setUser] = useContext(UserContext);
+  const [run, setRun] = useContext(RunContext);
 
-  //TODO handle setErrors if user enters an invalid email
+  //TODO handle setErrors if run enters an invalid email
   const [errors] = useState({});
 
   const handleChange = e => {
-    setUser({ [e.target.name]: e.target.value });
-    console.log(user);
+    setRun({...run, [e.target.name]: e.target.value });
+    console.log(run);
   };
 
   return (
     <>
       <Form.Input
         name="email"
-        value={user.email}
+        value={run.email}
         label="Email"
         width={6}
         placeholder="joe@email.com"
