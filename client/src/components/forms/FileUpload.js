@@ -14,7 +14,7 @@ function FileUploadForm() {
     Papa.parse(e.target.files[0], {
       complete: function(results) {
         console.log(results);
-        setRun({ ...run, totalSamples: results.data.length-1, file:file });
+        setRun({ ...run, totalSamples: results.data[0].length-1, file:file });
       }
     });
   }
