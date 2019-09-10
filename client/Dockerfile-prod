@@ -7,10 +7,13 @@ RUN mkdir /src
 WORKDIR /src
 
 # Add `/usr/src/app/node_modules/.bin` to $PATH
+ENV REACT_APP_API_ROOT $REACT_APP_API_ROOT
 ENV PATH /src/node_modules/.bin:$PATH
+ENV NODE_ENV production
 
-# Environment variable
-ARG REACT_APP_API_ROOT=$REACT_APP_API_ROOT
+RUN echo $REACT_APP_API_ROOT
+RUN echo $PATH
+RUN echo $NODE_ENV
 
 # Install and cache app dependencies
 COPY package*.json /src/
