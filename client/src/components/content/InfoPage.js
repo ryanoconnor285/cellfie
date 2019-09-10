@@ -1,17 +1,23 @@
-import React from 'react'
-import { Image } from 'semantic-ui-react'
+import React from "react";
+import { Icon } from "semantic-ui-react";
 
 const InfoPage = () => {
   return (
     <div>
-      <Image src='/images/wireframe/square-image.png' size='medium' circular />
-      Set Parameters
-      <Image src='/images/wireframe/square-image.png' size='medium' circular />
-      Upload Samples
-      <Image src='/images/wireframe/square-image.png' size='medium' circular />
-      
+      <Icon name="sliders horizontal" size="huge" />
+      <h2>Set Parameters</h2>
+      <br />
+      <Icon name="upload" size="huge" />
+      <h2>Upload Samples</h2>
+      <br />
+      <Icon name="stopwatch" size="huge" />
+      <h2>We'll let you know when the results are in</h2>
+      <br />
+      <Icon name="chart pie" size="huge" />
+      <h2>Get results with visualizations</h2>
+      <br />
     </div>
-  )
-}
+  );
+};
 
-export default InfoPage
+export default InfoPage;
