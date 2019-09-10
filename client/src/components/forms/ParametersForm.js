@@ -3,6 +3,7 @@ import FileUploadForm from "./FileUpload";
 import GlobalThreshold from "./threshold/GlobalThreshold";
 import LocalThreshold from "./threshold/LocalThreshold";
 import EmailInput from "./EmailInputForm";
+import SubmitForm from "./SubmitForm";
 import { RunContext } from "../../context/RunContext";
 import { Form } from "semantic-ui-react";
 
@@ -67,6 +68,7 @@ function FormExampleWidthField() {
       </Form.Group>
       {run.geneThreshold === "global" ? <GlobalThreshold /> : null}
       {run.geneThreshold === "local" ? <LocalThreshold /> : null}
+      <SubmitForm />
     </Form>
   );
 }
