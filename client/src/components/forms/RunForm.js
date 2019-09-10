@@ -2,13 +2,13 @@ import React, { Fragment, useState, useContext } from "react";
 import EmailInputForm from "./EmailInputForm";
 import ParametersForm from "./ParametersForm";
 import { FileContext } from "../../context/FileContext";
-import { UserContext } from "../../context/UserContext";
+import { RunContext } from "../../context/RunContext";
 import { Menu, Button, Segment } from "semantic-ui-react";
 import axios from 'axios';
 
 function RunForm() {
   const [file] = useContext(FileContext)
-  const [user] = useContext(UserContext);
+  const [run] = useContext(RunContext);
   const [uploadedFile, setUploadedFile] = useState({})
   const [activeItem, setActiveItem] = useState(0);
 
@@ -18,15 +18,15 @@ function RunForm() {
     e.preventDefault()
     const formData = new FormData();
     formData.append('file', file)
-    formData.append('uid', user.email)
+    formData.append('uid', run.email)
     try {
       const res = await axios.post('/upload', formData, {
         headers: {
           "Content-Type": "multipart/form-data"
         }
       })
-      const { fileName, filePath } = res.data;
-      setUploadedFile({ fileName, filePath})
+      const { fileName, filePath, guid } = res.data;
+      setUploadedFile({ fileName, filePath, guid})
       console.log(uploadedFile)
     } catch(err) {
       if(err.response.status === 500) {
@@ -61,6 +61,8 @@ function RunForm() {
       </Menu>
 
       <Segment style={{ minHeight: 500 }} attached="bottom">
+      {uploadedFile.fileName ? <span>File Uploaded!!</span> : null }
+      {uploadedFile.guid ? <span>Don't lose this {uploadedFile.guid}</span> : null }
         {activeItem === 0 && <EmailInputForm />}
         {activeItem === 1 && <ParametersForm />}
         {activeItem === 2 && "View Jobs"}
